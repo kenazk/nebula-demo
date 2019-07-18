@@ -1,0 +1,83 @@
+version: v1
+description: Workflow to echo a nice hello world message to the logs
+variables: null
+steps:
+  - name: Step 1
+    description: ""
+    image: alpine:latest
+    input:
+      - echo "Hello world. I am Step 1"
+  - name: Step 2
+    description: ""
+    image: alpine:latest
+    input:
+      - echo "Hello world. I am Step 2"
+    depends_on:
+      - Step 1
+  # - name: cat spec 2
+  #   description: ""
+  #   image: gcr.io/nebula-235818/nebula-shell-runner
+  #   spec:
+  #     variables:
+  #       - name: slack-channel
+  #         value: nebula-workflows
+  #       - name: slack-message
+  #         value: hello world was sent
+  #   input:
+  #     - cat /nebula/spec.json | jq -r  '.variables[]|select(.name |
+  #       startswith("slack"))'
+  #   depends_on:
+  #     - cat spec 1
+  # - name: echo spec 1
+  #   description: ""
+  #   image: gcr.io/nebula-235818/nebula-shell-runner
+  #   spec:
+  #     apitoken: slack-token
+  #     slack:
+  #       channel: slack-channel
+  #       message: hello world was sent
+  #   input:
+  #     - "#!/bin/sh"
+  #     - TOKEN=$(jq -r .apitoken /nebula/spec.json)
+  #     - echo $TOKEN
+  #     - CHANNEL=$(jq -r .slack.channel /nebula/spec.json)
+  #     - echo $CHANNEL
+  #     - MESSAGE=$(jq -r .slack.message /nebula/spec.json)
+  #     - echo $MESSAGE
+  #   depends_on:
+  #     - hello world
+  # - name: echo spec 2
+  #   description: ""
+  #   image: gcr.io/nebula-235818/nebula-shell-runner
+  #   spec:
+  #     environments:
+  #       - test
+  #       - staging
+  #       - prod
+  #     file: ./tf/main.tf
+  #     vars:
+  #       nodes: 3
+  #       projectid: nebula-demo
+  #       region: region
+  #   input:
+  #     - NODES=$(jq -r .vars.nodes /nebula/spec.json)
+  #     - echo $NODES
+  #     - REGION=$(jq -r .vars.region /nebula/spec.json)
+  #     - echo $REGION
+  #     - ENVIRONMENTS=$(jq -r .environments[] /nebula/spec.json)
+  #     - echo $ENVIRONMENTS
+  #   depends_on:
+  #     - echo spec 1
+  # - name: notify
+  #   description: ""
+  #   image: puppet/nebula-slack-notification:v1
+  #   spec:
+  #     apitoken:
+  #       $type: Secret
+  #       name: slack-token
+  #     channel: "#nebula-workflows"
+  #     message: hello world from Nebula!
+  #   depends_on:
+  #     - cat spec 2
+  #     - echo spec 2
+
