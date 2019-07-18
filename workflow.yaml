@@ -12,42 +12,42 @@ steps:
     image: alpine:latest
     input:
       - echo "Hello world. I am Step 2"
-    depends_on:
+    dependsOn:
       - Step 1
   - name: Step 3
     description: ""
     image: alpine:latest
     input:
       - echo "Hello world. I am Step 3"
-    depends_on:
+    dependsOn:
       - Step 1
   - name: Step 4
     description: ""
     image: alpine:latest
     input:
       - echo "Hello world. I am Step 4"
-    depends_on:
+    dependsOn:
       - Step 2
   - name: Step 5
     description: ""
     image: alpine:latest
     input:
       - echo "Hello world. I am Step 5"
-    depends_on:
+    dependsOn:
       - Step 2
   - name: Step 6
     description: ""
     image: alpine:latest
     input:
       - echo "Hello world. I am Step 6"
-    depends_on:
+    dependsOn:
       - Step 3
   - name: Step 7
     description: ""
     image: alpine:latest
     input:
       - echo "Hello world. I am Step 7"
-    depends_on:
+    dependsOn:
       - Step 3
   # - name: cat spec 2
   #   description: ""
@@ -61,7 +61,7 @@ steps:
   #   input:
   #     - cat /nebula/spec.json | jq -r  '.variables[]|select(.name |
   #       startswith("slack"))'
-  #   depends_on:
+  #   dependsOn:
   #     - cat spec 1
   # - name: echo spec 1
   #   description: ""
@@ -79,7 +79,7 @@ steps:
   #     - echo $CHANNEL
   #     - MESSAGE=$(jq -r .slack.message /nebula/spec.json)
   #     - echo $MESSAGE
-  #   depends_on:
+  #   dependsOn:
   #     - hello world
   # - name: echo spec 2
   #   description: ""
@@ -101,7 +101,7 @@ steps:
   #     - echo $REGION
   #     - ENVIRONMENTS=$(jq -r .environments[] /nebula/spec.json)
   #     - echo $ENVIRONMENTS
-  #   depends_on:
+  #   dependsOn:
   #     - echo spec 1
   # - name: notify
   #   description: ""
@@ -112,7 +112,7 @@ steps:
   #       name: slack-token
   #     channel: "#nebula-workflows"
   #     message: hello world from Nebula!
-  #   depends_on:
+  #   dependsOn:
   #     - cat spec 2
   #     - echo spec 2
 
