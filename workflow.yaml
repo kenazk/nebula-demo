@@ -21,6 +21,34 @@ steps:
       - echo "Hello world. I am Step 3"
     depends_on:
       - Step 1
+  - name: Step 4
+    description: ""
+    image: alpine:latest
+    input:
+      - echo "Hello world. I am Step 4"
+    depends_on:
+      - Step 2
+  - name: Step 5
+    description: ""
+    image: alpine:latest
+    input:
+      - echo "Hello world. I am Step 5"
+    depends_on:
+      - Step 2
+  - name: Step 6
+    description: ""
+    image: alpine:latest
+    input:
+      - echo "Hello world. I am Step 6"
+    depends_on:
+      - Step 3
+  - name: Step 7
+    description: ""
+    image: alpine:latest
+    input:
+      - echo "Hello world. I am Step 7"
+    depends_on:
+      - Step 3
   # - name: cat spec 2
   #   description: ""
   #   image: gcr.io/nebula-235818/nebula-shell-runner
