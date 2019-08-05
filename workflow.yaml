@@ -2,11 +2,12 @@ version: v1
 description: Workflow to echo a nice hello world message to the logs
 variables: null
 steps:
-  - name: Step 1
+  - name: Step 1 - Provision K8s cluster
     description: ""
     image: alpine:latest
     input:
       - echo "Hello world. I am Step 1"
+      - sleep 2
   - name: Step 2
     description: ""
     image: alpine:latest
